@@ -1,0 +1,96 @@
+.flex-grid {
+    display: flex;
+    border: 5px;
+    border-style: dashed;
+    border-color: tomato;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-image: repeating-linear-gradient(45deg, cyan 50px,blueviolet 100px, fuchsia 150px, coral 200px, yellow 250px, lime 300px);
+    padding: 40px;
+  }
+  .colone {
+    flex: 1;
+    width: 150px;
+    color: rgb(255, 0, 0);
+    font-size: 75px;
+    background-color: rgb(248, 165, 165);
+    border: 5px;
+    border-style: dotted;
+    border-color: blanchedalmond;
+    /*transform: rotate(-2deg);*/
+  }
+  .coltwo {
+    flex: 1;
+    width: 150px;
+    color: DeepSkyBlue;
+    font-size: 75px;
+    background-color: rgb(39, 102, 185);
+    border: 5px;
+    border-style: dotted;
+    border-color: blanchedalmond;
+    /*transform: rotate(4deg);*/
+  }
+  .colthree {
+    flex: 1;
+    width: 150px;
+    color: rgb(28, 107, 18);
+    font-size: 75px;
+    background-color: rgb(63, 224, 14);
+    border: 5px;
+    border-style: dotted;
+    border-color: blanchedalmond;
+    /*transform:scaleY(0.5);*/
+  }
+  .colfour {
+    flex: 1;
+    width: 150px;
+    color: rgb(228, 202, 89);
+    font-size: 75px;
+    background-color: rgb(221, 102, 23);
+    border: 5px;
+    border-style: dotted;
+    border-color: blanchedalmond;
+    border-radius: 50px;
+  }
+  .colfive {
+    flex: 1;
+    width: 150px;
+    color: goldenrod;
+    font-size: 75px;
+    background-color: mediumslateblue;
+    border: 5px;
+    border-style: groove;
+    border-color: darkorchid;
+  }
+  .results {
+    padding: 10px;
+    border: 5px;
+    border-style: double;
+    background-color: whitesmoke;
+    color: black;
+    font-family: fantasy;
+    font-size: 50px;
+    text-align: center;
+    height: 100px;
+    line-height: 100px;
+    width: 420px;
+    margin-left: 449px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .inputs {
+    padding: 10px;
+    border: 5px;
+    border-style: double;
+    background-color: whitesmoke;
+    color: black;
+    font-family: fantasy;
+    font-size: 50px;
+    text-align: center;
+    height: 100px;
+    line-height: 100px;
+    width: 420px;
+    position: absolute;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
