@@ -13,14 +13,14 @@ function Calculator() {
       };
     });
     return null;
-  } //i don't understand, where is the return for setRunningTot?
+  }
   function Evaluate(sum) {
     //split string up by space delimiter
     const splitSum = sum.split(/[ ]/);
 
     let i;
     for (i = 0; i < splitSum.length; i++) {
-      //couldn't use the for (let fruits in blah) type for loop for some reason, not sure i'm clear on what the fruits is. can't index with it
+      
       const leadChar = splitSum[i].slice(0, 1);
 
       if (leadChar == 0) {
@@ -29,13 +29,48 @@ function Calculator() {
     }
 
   
-    splitSum.forEach((sumBit) => {
-      console.log(sumBit);
+    return splitSum;
+  }
+
+  function evalReplacement(calcInput) {
+
+    const toBeEvaled = Evaluate(calcInput);
+
+    let runningCalc = null;
+    let isOperator = false;
+    let operator;
+
+    toBeEvaled.forEach(element => {
+      if (isOperator) {
+        isOperator = false;
+        runningCalc = operator(runningCalc, parseFloat(element))
+      }
+
+      if (element === "+") {
+        isOperator = true;
+        operator = (current, newValue) => current + newValue;
+      }
+
+      else if (element === "-") {
+        isOperator = true;
+        operator = (current, newValue) => current - newValue;
+      }
+
+      else if (element === "/") {
+        isOperator = true;
+        operator = (current, newValue) => current / newValue;
+      }
+
+      else if (element === "*") {
+        isOperator = true;
+        operator = (current, newValue) => current * newValue;
+      }
+
+      if (runningCalc === null) {
+        runningCalc = parseFloat(element)
+      }
     });
-
-    const cleanSum = splitSum.join("");
-
-    return cleanSum;
+    return runningCalc
   }
 
   return (
@@ -111,7 +146,7 @@ function Calculator() {
               setCalcyState(function (oldCalcState) {
                 return {
                   runningtot: oldCalcState.runningtot,
-                  result: eval(Evaluate(oldCalcState.runningtot)),
+                  result: evalReplacement(oldCalcState.runningtot),
                 };
               })
             }
@@ -126,35 +161,3 @@ function Calculator() {
 
 export default Calculator;
 
-
-
-/*
-
-let runningTot = null;
-    let isOperator = false
-    let operator
-    splitedArray.forEach(element => {
-      // If the last item was an operator we will use it. 
-      if (isOperator) {
-        // make sure to set it to false so next time it loops we 
-        isOperator = false;
-        runningTot = operator(runningTot, parseFloat(element))
-      }
-      if (element === "+") {
-        isOperator = true
-        operator = (current, newValue) => current + newValue
-      } else if (element === "-") {
-        isOperator = true
-        operator = (current, newValue) => current - newValue
-      } else if (element === "/") {
-        isOperator = true
-        operator = (current, newValue) => current / newValue
-      } else if (element === "*") {
-        isOperator = true
-        operator = (current, newValue) => current * newValue
-      }
-      if (runningTot === null) {
-        runningTot = parseFloat(element)
-      }
-    });
-    return runningTot;*/
