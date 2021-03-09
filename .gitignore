@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/isCharacterAllowed (version 1).xlsb.xlsx
+/isCharacterAllowed.xlsx
+/~$isCharacterAllowed.xlsx
