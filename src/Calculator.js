@@ -1,5 +1,6 @@
 import "./calculator.css";
 import { useState } from "react";
+import maths from "my-math-conan";
 
 function Calculator() {
   const [CalcyState, setCalcyState] = useState({ runningtot: "", result: "" });
@@ -49,7 +50,7 @@ debugger;
 
       if (element === "+") {
         isOperator = true;
-        operator = (current, newValue) => current + newValue;
+        operator = maths.add;
       } else if (element === "-") {
         isOperator = true;
         operator = (current, newValue) => current - newValue;
