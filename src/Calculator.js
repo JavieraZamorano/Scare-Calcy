@@ -33,7 +33,7 @@ function Calculator() {
 
   function evalReplacement(calcInput) {
     const toBeEvaled = Evaluate(calcInput);
-debugger;
+
     let runningCalc = 0;
     let isOperator = false;
     let operator;
@@ -42,13 +42,13 @@ debugger;
       if (isOperator && (parseFloat(element) - parseFloat(element) === 0)) {
         isOperator = false;
         runningCalc = operator(runningCalc, parseFloat(element));
-      }
-     /* else if (toBeEvaled[index-1]==="+" && toBeEvaled[index]==="-" || toBeEvaled[index-1]==="-" && toBeEvaled[index]==="+") {
+      } else if ((toBeEvaled[index-1]==="+" && toBeEvaled[index]==="-") || (toBeEvaled[index-1]==="-" && toBeEvaled[index]==="+")) {
         isOperator = true;
         operator = (current, newValue) => current - newValue;
-      }*/
-
-      if (element === "+") {
+      } else if ((toBeEvaled[index-1]==="+" && toBeEvaled[index]==="+") || (toBeEvaled[index-1]==="-" && toBeEvaled[index]==="-")) {
+        isOperator = true;
+        operator = (current, newValue) => current + newValue;
+      } else if (element === "+") {
         isOperator = true;
         operator = maths.add;
       } else if (element === "-") {
@@ -70,15 +70,14 @@ debugger;
   }
 
   function isCharacterAllowed(pressedChar, prevChar) {
-    const plusArray = ["+","-","*","/","(",")","0","1","2","3","4","5","6","7","8","9",undefined];
+    const plusMinusArray = ["+","-","*","/","(",")","0","1","2","3","4","5","6","7","8","9",undefined];
     const minusArray = ["+","-","*","/","(",")","0","1","2","3","4","5","6","7","8","9",undefined];
     const timesDivideArray = [")","0","1","2","3","4","5","6","7","8","9",undefined];
-debugger;
+
     switch(pressedChar) {
       case "+":
-        return plusArray.includes(prevChar);
       case "-":
-        return minusArray.includes(prevChar);
+        return plusMinusArray.includes(prevChar);
       case "*":
       case "/":
         return timesDivideArray.includes(prevChar);
@@ -118,7 +117,7 @@ debugger;
             onClick={() =>
               setCalcyState(function (oldCalcState) {
                 return {
-                  runningtot: oldCalcState.runningtot.slice(0, -1), // this is now broken, have to click twice owing to empty spaces
+                  runningtot: oldCalcState.runningtot.slice(0, -1),
                   result: "",
                 };
               })
@@ -186,5 +185,4 @@ debugger;
     </div>
   );
 }
-
 export default Calculator;
