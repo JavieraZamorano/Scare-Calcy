@@ -71,7 +71,6 @@ function Calculator() {
 
   function isCharacterAllowed(pressedChar, prevChar) {
     const plusMinusArray = ["+","-","*","/","(",")","0","1","2","3","4","5","6","7","8","9",undefined];
-    const minusArray = ["+","-","*","/","(",")","0","1","2","3","4","5","6","7","8","9",undefined];
     const timesDivideArray = [")","0","1","2","3","4","5","6","7","8","9",undefined];
 
     switch(pressedChar) {
@@ -125,21 +124,16 @@ function Calculator() {
           >
             DEL
           </div>
-          <div onClick={() => setRunningTot("*")}>x</div>
-          <div
-            onClick={() => {
-              if (
-                isCharacterAllowed(
-                  "+",
-                  CalcyState.runningtot[CalcyState.runningtot.length - 1]
-                )
-              ) {
-                setRunningTot("+");
-              }
-            }}
-          >
-            +
-          </div>
+          <div onClick={() => {
+            if (isCharacterAllowed("*", CalcyState.runningtot[CalcyState.runningtot.length - 1])) {
+              setRunningTot("*");
+            }
+          }}>x</div>
+          <div onClick={() => {
+            if (isCharacterAllowed("+", CalcyState.runningtot[CalcyState.runningtot.length - 1])) {
+              setRunningTot("+");
+            }
+          }}>+</div>
           <div
             onClick={() =>
               setCalcyState(function (oldCalcState) {
@@ -166,8 +160,16 @@ function Calculator() {
           >
             AC
           </div>
-          <div onClick={() => setRunningTot("/")}>/</div>
-          <div onClick={() => setRunningTot("-")}>-</div>
+          <div onClick={() => {
+            if (isCharacterAllowed("/", CalcyState.runningtot[CalcyState.runningtot.length - 1])) {
+              setRunningTot("/");
+            }
+          }}>/</div>
+          <div onClick={() => {
+            if (isCharacterAllowed("-", CalcyState.runningtot[CalcyState.runningtot.length - 1])) {
+              setRunningTot("-");
+            }
+          }}>-</div>
           <div
             onClick={() =>
               setCalcyState(function (oldCalcState) {
