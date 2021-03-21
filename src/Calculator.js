@@ -17,7 +17,7 @@ function Calculator() {
   }
   function Evaluate(sum) {
     //split string up by space delimiter
-    const splitSum = sum.split(/(?=[-+/\*()])|(?<=[-+/\*()])/g);
+    const splitSum = sum.split(/(?=[-+/\*])|(?<=[-+/\*])/g);
 
     let i;
     for (i = 0; i < splitSum.length; i++) {
@@ -65,7 +65,7 @@ function Calculator() {
         operator = (current, newValue) => current * newValue;
       }
 
-      if (runningCalc === 0) {
+      if (index === 0) {
         runningCalc = parseFloat(element);
       }
     });
