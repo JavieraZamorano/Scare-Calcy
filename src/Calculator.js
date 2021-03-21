@@ -17,7 +17,7 @@ function Calculator() {
   }
   function Evaluate(sum) {
     //split string up by space delimiter
-    const splitSum = sum.split(/(?=[-+/\*])|(?<=[-+/\*])/g);
+    const splitSum = sum.split(/(?=[-+/\*()])|(?<=[-+/\*()])/g);
 
     let i;
     for (i = 0; i < splitSum.length; i++) {
@@ -48,6 +48,9 @@ function Calculator() {
       } else if ((toBeEvaled[index-1]==="+" && toBeEvaled[index]==="+") || (toBeEvaled[index-1]==="-" && toBeEvaled[index]==="-")) {
         isOperator = true;
         operator = (current, newValue) => current + newValue;
+      } else if (toBeEvaled[index-1]==="*" && toBeEvaled[index]==="*") {
+        isOperator = true;
+        operator = (current, newValue) => current ** newValue;
       } else if (element === "+") {
         isOperator = true;
         operator = maths.add;
@@ -71,7 +74,10 @@ function Calculator() {
 
   function isCharacterAllowed(pressedChar, prevChar) {
     const plusMinusArray = ["+","-","*","/","(",")","0","1","2","3","4","5","6","7","8","9",undefined];
-    const timesDivideArray = [")","0","1","2","3","4","5","6","7","8","9",undefined];
+    const timesDivideArray = [")","0","1","2","3","4","5","6","7","8","9"];
+    const leftBracketArray = ["+","-","*","/","(",")","0","1","2","3","4","5","6","7","8","9",undefined];
+    const rightBracketArray = ["(",")","0","1","2","3","4","5","6","7","8","9"];
+    const pointArray = ["+","-","*","/","(","0","1","2","3","4","5","6","7","8","9",undefined]
 
     switch(pressedChar) {
       case "+":
@@ -80,6 +86,12 @@ function Calculator() {
       case "*":
       case "/":
         return timesDivideArray.includes(prevChar);
+      case "(":
+        return leftBracketArray.includes(prevChar);
+      case ")":
+        return rightBracketArray.includes(prevChar);
+      case ".":
+        return pointArray.includes(prevChar);
       default:
         return true;
     
@@ -98,14 +110,26 @@ function Calculator() {
           <div onClick={() => setRunningTot("0")}>0</div>
         </div>
         <div className="coltwo">
-          <div onClick={() => setRunningTot("(")}>(</div>
+          <div onClick={() => {
+            if (isCharacterAllowed("(", CalcyState.runningtot[CalcyState.runningtot.length - 1])) {
+              setRunningTot("(");
+            }
+          }}>(</div>
           <div onClick={() => setRunningTot("8")}>8</div>
           <div onClick={() => setRunningTot("5")}>5</div>
           <div onClick={() => setRunningTot("2")}>2</div>
-          <div onClick={() => setRunningTot(".")}>.</div>
+          <div onClick={() => {
+            if (isCharacterAllowed(".", CalcyState.runningtot[CalcyState.runningtot.length - 1])) {
+              setRunningTot(".");
+            }
+          }}>.</div>
         </div>
         <div className="colthree">
-          <div onClick={() => setRunningTot(")")}>)</div>
+          <div onClick={() => {
+            if (isCharacterAllowed(")", CalcyState.runningtot[CalcyState.runningtot.length - 1])) {
+              setRunningTot(")");
+            }
+          }}>)</div>
           <div onClick={() => setRunningTot("9")}>9</div>
           <div onClick={() => setRunningTot("6")}>6</div>
           <div onClick={() => setRunningTot("3")}>3</div>
